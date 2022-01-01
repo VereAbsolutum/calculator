@@ -1,0 +1,66 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  padding-top: 8rem;
+}
+
+/* LAYOUT */
+
+.display-grid {
+  display: grid;
+  gap: 5px;
+}
+
+/* CALCULATOR */
+
+.calculator {
+  width: 200px;
+  padding: 1rem 0.6rem;
+  box-shadow: 0px 0px 10px;
+}
+
+/* UPPER */
+.upper {
+  box-shadow: 0px 0px 3px;
+  padding: 0.5rem 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.upper .previous {
+  font-size: 80%;
+  color: #3f3f3f;
+}
+
+.upper .current {
+  color: #350606;
+}
+
+.upper .display {
+  height: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* BOTTOM */
+
+.bottom {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* BUTTONS */
+
+.bottom button {
+  height: 2.2rem;
+}
+
+.bottom button.span-two {
+  grid-column: span 2;
+}
