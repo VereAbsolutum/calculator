@@ -32,8 +32,8 @@ function createAction({ type, payload }) {
 }
 
 function formatOperand(operand) {
-  if (!operand) return
-  const [integer, decimal] = operand.split('.')
+  if (operand == null || operand == 'undefined') return
+  const [integer, decimal] = operand.toString().split('.')
   if (decimal == null) return INTEGER_FORMATTER.format(integer)
   return `${INTEGER_FORMATTER.format(integer)}.${decimal}`
 }
@@ -116,23 +116,27 @@ function reducers(state, { type, payload }) {
       }
     case ACTIONS.CLEAR:
       return {
-        currentOperand: 0
+        ...state,
+        currentOperand: '0'
       }
     case ACTIONS.DELETE_DIGIT:
       if (state.overwrite) {
         return {
           ...state,
           overwrite: false,
-          currentOperand: null
+          currentOperand: '0'
         }
       }
       if (state.currentOperand == null) {
-        return state
+        return {
+          ...state,
+          currentOperand: '0'
+        }
       }
       if (state.currentOperand.length === 1) {
         return {
           ...state,
-          currentOperand: null
+          currentOperand: '0'
         }
       }
       return {
@@ -177,7 +181,7 @@ function calculate(e) {
   }
   const action = createAction({
     type: types[e.target.dataset.type],
-    payload: { [e.target.dataset.type]: e.target.value }
+    payload: { [e.target.dataset.type]: e.target.value.toString() }
   })
   dispatch(action)
   previous.innerText = display([
